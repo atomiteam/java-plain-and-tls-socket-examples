@@ -20,21 +20,44 @@ Lets explore packages:
 For simplicity, self signed certificates are used. The scripts (cert.txt) and generated files are in the same package of the applications.
 
 
+Plain socket is opened through ServerSocket.
+
 ```java
-		String keyStore = ApplicationServer.class.getClassLoader().getResource("com/atomiteam/socket/mutual/server.pkcs12").getFile();
-		String trustStore = ApplicationServer.class.getClassLoader().getResource("com/atomiteam/socket/mutual/server.trust").getFile();
+serverSocket = new ServerSocket(port);
+```
+
+TLS socket is opened through SSLServerSocketFactory.
+
+```java
+
+SSLServerSocketFactory ssf = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+serverSocket = ssf.createServerSocket(port);
 
 ```
 
+The client certificate authentication is forced through below line.
+
+```java
+serverSocket.setNeedClientAuth(true);
+
+```
+
+Key store and trust stores are set into system variables programmatically. 
 
 ```java
 
-		System.setProperty("javax.net.ssl.keyStore", keyStore);
-		System.setProperty("javax.net.ssl.keyStorePassword", "password");
-		System.setProperty("javax.net.debug", "all");
-		
-		
-		System.setProperty("javax.net.ssl.trustStore", trustStore);
-		System.setProperty("javax.net.ssl.trustStorePassword", "password");
-		System.setProperty("javax.net.ssl.trustStoreType", "JKS");
+String keyStore = ApplicationServer.class.getClassLoader()
+				.getResource("com/atomiteam/socket/mutual/client.pkcs12").getFile();
+String trustStore = ApplicationServer.class.getClassLoader()
+				.getResource("com/atomiteam/socket/mutual/client.trust").getFile();
+
+System.setProperty("javax.net.ssl.trustStore", trustStore);
+System.setProperty("javax.net.ssl.trustStorePassword", "password");
+System.setProperty("javax.net.ssl.trustStoreType", "JKS");
+
+System.setProperty("javax.net.ssl.keyStore", keyStore);
+System.setProperty("javax.net.ssl.keyStorePassword", "password");
+
+System.setProperty("javax.net.debug", "all");
+
 ````
