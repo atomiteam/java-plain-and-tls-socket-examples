@@ -17,5 +17,5 @@ Lets explore packages:
 * com.atomiteam.socket.mutual: Client and Server applications that talk in TLS and both the client and server authenticates the certificate of the other side, which is called Mutual SSL Authentication.
 
 
-
+For simplicity, self signed certificates are used. The scripts (cert.txt) and generated files are in the same package of the applications.
 
