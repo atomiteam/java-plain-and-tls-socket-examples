@@ -1,0 +1,9 @@
+keytool -genkey -keyalg RSA -alias server -keystore server.jks -storepass password -validity 360 -keysize 2048
+keytool -importkeystore -srckeystore server.jks -destkeystore server.pkcs12 -deststoretype pkcs12
+openssl pkcs12 -in server.pkcs12 -clcerts -nokeys -out server.pem
+
+keytool -import -file server.pem -alias server -keystore client.trust
+
+openssl s_client -showcerts -connect localhost:6666
+
+keytool -list -v -keystore client.trust
