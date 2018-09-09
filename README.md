@@ -20,14 +20,15 @@ Lets explore packages:
 For simplicity, self signed certificates are used. The scripts (cert.txt) and generated files are in the same package of the applications.
 
 
-`
+```java
 		String keyStore = ApplicationServer.class.getClassLoader().getResource("com/atomiteam/socket/mutual/server.pkcs12").getFile();
 		String trustStore = ApplicationServer.class.getClassLoader().getResource("com/atomiteam/socket/mutual/server.trust").getFile();
-	
-	
-`
 
-`
+```
+
+
+```java
+
 		System.setProperty("javax.net.ssl.keyStore", keyStore);
 		System.setProperty("javax.net.ssl.keyStorePassword", "password");
 		System.setProperty("javax.net.debug", "all");
@@ -36,5 +37,4 @@ For simplicity, self signed certificates are used. The scripts (cert.txt) and ge
 		System.setProperty("javax.net.ssl.trustStore", trustStore);
 		System.setProperty("javax.net.ssl.trustStorePassword", "password");
 		System.setProperty("javax.net.ssl.trustStoreType", "JKS");
-`		
-		
+````
