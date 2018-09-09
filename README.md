@@ -23,7 +23,11 @@ For simplicity, self signed certificates are used. The scripts (cert.txt) and ge
 `
 		String keyStore = ApplicationServer.class.getClassLoader().getResource("com/atomiteam/socket/mutual/server.pkcs12").getFile();
 		String trustStore = ApplicationServer.class.getClassLoader().getResource("com/atomiteam/socket/mutual/server.trust").getFile();
-		
+	
+	
+`
+
+`
 		System.setProperty("javax.net.ssl.keyStore", keyStore);
 		System.setProperty("javax.net.ssl.keyStorePassword", "password");
 		System.setProperty("javax.net.debug", "all");
